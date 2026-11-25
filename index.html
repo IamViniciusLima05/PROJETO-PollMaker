@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PollMaker | Crie enquetes</title>
+  <meta name="description" content="Crie enquetes com várias opções, veja os resultados em gráfico de barras e compartilhe por link.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <a href="#/" class="marca">Poll<span>Maker</span></a>
+    <a href="#/nova" class="btn" id="btn-nova">+ Nova enquete</a>
+  </header>
+
+  <main class="app" id="app"></main>
+
+  <template id="tpl-inicio">
+    <section class="hero">
+      <h1>Pergunte. Vote. <em>Decida.</em></h1>
+      <p>Crie uma enquete em segundos e compartilhe o link com quem você quiser.</p>
+    </section>
+    <h2 class="sec-titulo">Suas enquetes</h2>
+    <ul class="enquetes" id="enquetes"></ul>
+  </template>
+
+  <template id="tpl-nova">
+    <section class="cartao criar">
+      <h1>Nova enquete</h1>
+      <form id="form-nova" autocomplete="off">
+        <label class="campo">Pergunta
+          <input id="n-pergunta" maxlength="140" required placeholder="Ex.: Onde vai ser o churrasco do time?">
+        </label>
+        <fieldset>
+          <legend>Opções</legend>
+          <ol class="opcoes-edit" id="n-opcoes"></ol>
+          <button type="button" class="link" id="n-add">+ Adicionar opção</button>
+        </fieldset>
+        <div class="ajustes">
+          <label class="chave"><input type="checkbox" id="n-multipla"><span></span> Permitir escolher mais de uma opção</label>
+          <label class="chave"><input type="checkbox" id="n-ocultar"><span></span> Mostrar resultado só depois de votar</label>
+        </div>
+        <p class="erro" id="n-erro" role="alert"></p>
+        <button class="btn grande">Criar enquete</button>
+      </form>
+    </section>
+  </template>
+
+  <template id="tpl-enquete">
+    <section class="cartao enquete">
+      <div class="enquete__topo">
+        <p class="meta" id="e-meta"></p>
+        <h1 id="e-pergunta"></h1>
+        <p class="dica" id="e-dica"></p>
+      </div>
+      <form id="form-voto">
+        <ul class="opcoes" id="e-opcoes"></ul>
+        <div class="enquete__acoes">
+          <button class="btn grande" id="e-votar">Votar</button>
+          <button type="button" class="link" id="e-ver">Ver resultado</button>
+        </div>
+      </form>
+      <div class="total" id="e-total" aria-live="polite"></div>
+    </section>
+
+    <section class="cartao compartilhar">
+      <h2>Compartilhar</h2>
+      <div class="link-caixa">
+        <input id="c-link" readonly aria-label="Link da enquete">
+        <button class="btn" id="c-copiar">Copiar link</button>
+      </div>
+      <div class="compartilhar__botoes">
+        <a class="btn sec" id="c-zap" target="_blank" rel="noopener">WhatsApp</a>
+        <button class="btn sec" id="c-nativo" hidden>Compartilhar…</button>
+        <button class="btn sec" id="c-resultado">Copiar resultado em texto</button>
+      </div>
+    </section>
+
+    <div class="gerenciar">
+      <button class="link" id="g-reabrir">Votar de novo neste aparelho</button>
+      <button class="link" id="g-encerrar"></button>
+      <button class="link perigo" id="g-excluir">Excluir enquete</button>
+    </div>
+  </template>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script src="js/script.js"></script>
+</body>
+</html>
